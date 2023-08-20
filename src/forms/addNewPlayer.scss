@@ -1,0 +1,25 @@
+.principalAddNewPlayer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 150px);
+  .insidePrincipalAddNew{
+    max-width: 1300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .enterButtonAdd{
+    
+      width: 160px;
+      background-color: rgb(230, 149, 0);
+      border: none;
+   
+  }
+ .errorMsg{
+  margin-top: 20px;
+  color: orange;
+ }
+}

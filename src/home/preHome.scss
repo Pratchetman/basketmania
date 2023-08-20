@@ -1,0 +1,35 @@
+.principalPreHome{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .insidePrincipalPreHome {
+    max-width: 1300px;
+    min-height: calc(100vh - 150px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    img {
+      width: 70%;
+      min-width: 500px;
+    }
+    .enterButton {
+      width: 160px;
+      background-color: rgb(230, 149, 0);
+      border: none;
+    }
+    .buttons{
+      margin-top: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .login {
+      background-color: white;
+      color: gray;
+    }
+  }
+}
+

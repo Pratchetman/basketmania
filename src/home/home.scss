@@ -1,0 +1,72 @@
+.principalHome {
+  min-height: calc(100vh - 150px);
+  color: rgb(121, 121, 121);
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  hr{
+    color: rgba(255, 255, 255, 0.486);
+    width: 40%;
+    max-width: 1300px;
+    box-shadow: 2px 2px black;
+    margin-bottom: 25px;
+  }
+  h1{
+    color: white;
+    text-shadow: 1px 1px black;
+   
+  }
+  .insidePrincipalHome {
+    max-width: 1300px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    width: 90%;
+    .sectionHome{
+        width: 40%;
+        min-width: 300px;
+        border: 2px solid white;
+        height: 250px;
+        border-radius: 8px;
+        border-color: rgb(121, 121, 121);
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.479);
+        h5{
+            color: white;
+            text-shadow: 1px 1px black;
+        }
+        box-shadow: 2px 2px 5px black;
+    }
+    .sectionHome:hover{
+        border-color: white;
+        cursor: pointer;
+    }
+    
+    .players{
+        background-image: url("../../public/images/players.jpg");
+        background-position: center;
+        background-size: cover;
+    }
+    .stats{
+        background-image: url("../../public/images/tablero.jpg");
+        background-position: center;
+        background-size: cover;
+    }
+    .ranking{
+        background-image: url("../../public/images/rankedit.png");
+        background-position: center;
+        background-size:cover;
+        background-repeat: no-repeat;
+    }
+    .team{
+        background-image: url("../../public/images/BasketManiaSemiWhite.png");
+        background-position: right;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+  }
+}

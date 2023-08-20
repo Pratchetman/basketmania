@@ -1,0 +1,75 @@
+.principalPlayers {
+  min-height: calc(100vh - 150px);
+  color: rgb(121, 121, 121);
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  hr {
+    color: rgba(255, 255, 255, 0.486);
+    width: 40%;
+    max-width: 1300px;
+    box-shadow: 2px 2px black;
+    margin-bottom: 25px;
+  }
+  h1 {
+    color: white;
+    text-shadow: 1px 1px black;
+  }
+  .insidePrincipalPlayers {
+    max-width: 800px;
+    width: 50%;
+    min-width: 340px;
+    .onePlayer {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      border: 1px solid rgb(121, 121, 121);
+      margin-bottom: 8px;
+      padding: 2px 8px;
+      border-radius: 8px;
+      box-shadow: 2px 2px 5px black;
+      .onePlayerDiv {
+        display: flex;
+        gap: 12px;
+        padding-right: 15px;
+        .number {
+          border-right: 1px solid rgb(121, 121, 121);
+        }
+
+      }
+      p {
+        margin: 0;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 4px;
+        span {
+          font-size: 28px;
+          font-weight: bold;
+          margin: 0 2px;
+          width: 39px;
+          color: rgb(231, 167, 49);
+        }
+      }
+      .height{
+        min-width: 65px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+    .onePlayer:hover {
+      border: 1px solid white;
+      cursor: pointer;
+    }
+  }
+}
+@media (max-width: 900px) {
+  .noMobile{
+    display: none !important;
+  }
+}

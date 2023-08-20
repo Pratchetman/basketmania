@@ -1,0 +1,43 @@
+.principalJornadaNumber {
+    width: 18%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 10px;
+   min-width: 127px;
+    h5{
+        margin-bottom: 20px;
+    }
+  .insidePrincipalJornadaNumber {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid rgb(121, 121, 121);
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 7px;
+    box-shadow: 2px 2px 5px black;
+    width: 100%;
+    .jornadaNumber {
+      margin-right: 7px;
+      padding: 3px 6px;
+    }
+    .jornadaNumberSelected {
+      margin-right: 7px;
+      padding: 3px 6px;
+      color: white;
+    }
+
+    .noSelectedMark {
+      width: 7px;
+    }
+    .selectedMark {
+      width: 7px;
+      background-color: orange;
+      border-left: 1px solid rgb(121, 121, 121);
+    }
+  }
+  .insidePrincipalJornadaNumber:hover {
+    cursor: pointer;
+    border: 1px solid white;
+  }
+}
