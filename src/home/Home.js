@@ -18,14 +18,17 @@ export const Home = ({setNav}) => {
         <div className="sectionHome players" onClick={()=>navigate("/players")}>
           <h5>Jugadores</h5>
         </div>
-        <div className="sectionHome stats" onClick={()=>navigate("/stats")}>
-          <h5>Estadísticas</h5>
+        <div className="sectionHome stats" onClick={()=>navigate("/calendar")}>
+          <h5>Calendario</h5>
         </div>
         <div className="sectionHome ranking" onClick={()=>navigate("/standings")}>
           <h5>Clasificación Liga Local</h5>
         </div>
         <div className="sectionHome team" onClick={()=>navigate("/about")}>
           <h5>El equipo</h5>
+        </div>
+        <div className="sectionHome editor" onClick={()=>navigate("/editor")}>
+          <h5>Editor temporada</h5>
         </div>
       </div>
     </div>

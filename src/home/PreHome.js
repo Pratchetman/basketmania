@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./preHome.scss";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 export const PreHome = ({ nav, setNav }) => {
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+  setNav(false)
+  }, [])
+  
   return (
     <div className="principalPreHome">
       <div className="insidePrincipalPreHome">

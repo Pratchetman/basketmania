@@ -4,7 +4,7 @@ export const Jornadas = ({ teamsList, setJornadaNumber, jornadaNumber }) => {
   console.log(jornadaNumber);
   return (
     <div className="principalJornadaNumber">
-      <h5>Jornadas</h5>
+      {teamsList.length > 0 &&<h5>Jornadas</h5>}
       {teamsList.map((elem, index) => {
         if (index != teamsList.length - 1)
           return (
