@@ -21,7 +21,7 @@ export const AddNewJornada = ({ setNav }) => {
   const [round, setRound] = useState("teams");
   const [group, setGroup] = useState("grupoA");
   const { getTeams } = DataFetch();
-  
+  console.log("lista jornadas",jornadasList);
   useEffect(() => {
     setNav(true);
     getTeams(round)
@@ -43,9 +43,16 @@ export const AddNewJornada = ({ setNav }) => {
     for (let i = 0; i < Math.floor(teamsList.length / 2); i++) {
       oneJornadaDefault.push(matchDefault);
     }
-    for (let i = 1; i < teamsList.length; i++) {
-      seasonDefault.push(oneJornadaDefault);
+    if (teamsList % 2 == 0){
+      for (let i = 1; i < teamsList.length; i++) {
+        seasonDefault.push(oneJornadaDefault);
+      }
+    }else{
+      for (let i = 1; i < teamsList.length + 1; i++) {
+        seasonDefault.push(oneJornadaDefault);
+      }
     }
+   
     setSeason(seasonDefault);
   }, [teamsList, round]);
 

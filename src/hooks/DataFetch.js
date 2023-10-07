@@ -88,6 +88,47 @@ const DataFetch = () => {
     });
   };
 
+  const finishSecondRound = (grupoAsched, grupoBsched) => {
+    // console.log(grupoAsched);
+    // console.log(grupoBsched);
+
+    // console.log("stoy aqui");
+    let dbs = getDatabase();
+    let faseFinalTeams = [];
+
+    const teamsA = getTeams("teams_groupA");
+    const teamsB = getTeams("teams_groupB");
+
+    return new Promise((resolve, reject) => {
+      teamsA.then((resA) => {
+        faseFinalTeams = calculateRanking(grupoAsched, resA.val());
+        teamsB.then((resB) => {
+          faseFinalTeams = faseFinalTeams.concat(
+            calculateRanking(grupoBsched, resB.val()).slice(0, 3)
+          );
+          console.log(faseFinalTeams);
+  
+          let object = {};
+  
+          for (let i = 0; i < faseFinalTeams.length; i++) {
+            object[faseFinalTeams[i].id] = {
+              id: faseFinalTeams[i].id,
+              name: faseFinalTeams[i].name,
+              position: i + 1,
+            };
+          }
+          set(ref(dbs, "faseFinalTeams/"), object)
+            .then(() => {
+              resolve("Fase Final Creada Correctamente");
+            })
+            .catch((error) => reject(error));
+        });
+      });
+    })
+
+ 
+  };
+
   const getPlayers = () => {
     let dbRef = ref(getDatabase());
 
@@ -150,6 +191,7 @@ const DataFetch = () => {
     getShedule,
     teamToName,
     finishRound,
+    finishSecondRound,
   };
 };
 

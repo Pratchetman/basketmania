@@ -1,0 +1,62 @@
+.principal-final{
+    text-align: center;
+    padding: 20px 30px 40px;
+    margin-top: 20px;
+    border: 1px solid rgb(121, 121, 121);
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px black;
+    h1{
+        color: white;
+        margin-bottom: 20px;
+    }
+    h6{
+        color: orange;
+    }
+    .d-Flex{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        gap: 20px;
+        width: 80vw;
+        .vertical{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            .match{
+                border: 1px solid rgb(121, 121, 121);
+                padding: 10px;
+                text-align: left;
+                border-radius: 8px;
+                box-shadow: 2px 2px 5px black;
+                display: flex;
+                gap: 10px;
+                flex-direction: row;
+                justify-content: space-between;
+             p{
+                margin: 0;
+             }
+             .teams{
+                margin: auto;
+             }
+             .points{
+                border-left: 1px solid orange;
+                display: flex;
+                flex-direction: row;
+                padding: 0px 10px;
+             }
+             .p1{
+                margin: 4px;
+                color: white;
+             }
+            }
+            .match:hover{
+                border: 1px solid white;
+                cursor: pointer;
+            }
+        }
+    }
+    
+}
+

@@ -5,6 +5,7 @@ import { Team } from "../components/Team";
 import { useParams } from "react-router-dom";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import checkComplete from "../utils/checkcomplete";
+import { FaseFinal } from "../components/FaseFinal";
 
 export const Stats = ({ setNav }) => {
   const edit = useParams().editor == "edit";
@@ -14,19 +15,29 @@ export const Stats = ({ setNav }) => {
   const [ronda, setRonda] = useState("round1");
   const [group, setGroup] = useState("grupoA");
   const [message, setMessage] = useState("");
-  const { addRound1, finishRound } = DataFetch();
- 
+  const { addRound1, finishRound, finishSecondRound } = DataFetch();
 
+  console.log(schedule);
+  console.log(ronda);
   useEffect(() => {
     setNav(true);
     getShedule(ronda)
       .then((res) => {
-        res.val() ?
-        setSchedule(res.val()) : setMessage("No existe ningún calendario creado, consulte con el administrador")
+        console.log(res.val());
+        if (res.val()) {
+          setSchedule(res.val());
+        } else {
+          if (ronda != "fase_final")
+          {
+            setMessage(
+            "No existe ningún calendario creado, consulte con el administrador"
+          );
+          }
+          setSchedule("");
+        }
       })
       .catch((err) => {
         console.log(err);
-        ;
       });
   }, [ronda, group]);
 
@@ -34,19 +45,17 @@ export const Stats = ({ setNav }) => {
     setMessage("");
     setRonda(e.target.value);
     setGroup("grupoA");
-   
   };
-
 
   const deepCopy = (arr) => {
     return arr.map((innerArray) => {
       return innerArray.map((obj) => ({ ...obj }));
     });
   };
- 
+
   const handlePoints = (homeAway, matchIndex, e) => {
     const aux = deepCopy(schedule);
-    
+
     homeAway == "home"
       ? (aux[jornada][matchIndex].pointsHome = e.target.value)
       : (aux[jornada][matchIndex].pointsAway = e.target.value);
@@ -68,17 +77,43 @@ export const Stats = ({ setNav }) => {
       .catch((err) => console.log(err));
   };
 
+  const handleFinishSecondRound = () => {
+    let grupoAsched = [];
+    let grupoBsched = [];
+
+    Promise.all([getShedule("round_groupA"), getShedule("round_groupB")])
+      .then(([resA, resB]) => {
+        console.log(resA.val());
+        console.log(resB.val());
+
+        if (resA.val() && resB.val()) {
+          grupoAsched = resA.val();
+          grupoBsched = resB.val();
+          finishSecondRound(grupoAsched, grupoBsched).then((res) =>{
+            setMessage(res);
+          })
+        } else {
+          setMessage("Error al extraer resultados de los Grupos A o B");
+        }
+      })
+      .catch((error) => {
+        console.error(
+          "Error al obtener los resultados de los Grupos A y B:",
+          error
+        );
+      });
+  };
+
   return (
     <div className="principalStats">
-
-<Form.Select
+      <Form.Select
         className="roundSelect"
         onChange={(e) => handleSelect(e)}
         aria-label="selector ronda"
       >
-        
         <option value="round1">1ª Ronda</option>
         <option value="round_groupA">2ª Ronda</option>
+        <option value="fase_final">Fase Final</option>
       </Form.Select>
       {(ronda == "round_groupA" || ronda == "round_groupB") && (
         <div className="groupsBut">
@@ -108,13 +143,23 @@ export const Stats = ({ setNav }) => {
       <div className="insidePrincipalStats">
         {schedule && (
           <div className="pages">
-            <p className="previous" onClick={() => {setJornada(jornada - 1);
-             setMessage("");}}>
+            <p
+              className="previous"
+              onClick={() => {
+                setJornada(jornada - 1);
+                setMessage("");
+              }}
+            >
               {schedule[jornada - 1] ? "⬅️ Jornada anterior" : ""}
             </p>
             <h3>Jornada: {jornada + 1}</h3>
-            <p className="next" onClick={() => {setJornada(jornada + 1);
-             setMessage("");}}>
+            <p
+              className="next"
+              onClick={() => {
+                setJornada(jornada + 1);
+                setMessage("");
+              }}
+            >
               {schedule[jornada + 1] ? "Jornada siguiente ➡️" : ""}
             </p>
           </div>
@@ -172,8 +217,13 @@ export const Stats = ({ setNav }) => {
               </>
             );
           })}
-        <section>
-          
+        {ronda == "fase_final" &&
+            <section>
+              <FaseFinal />
+            </section>
+        }
+          <section>
+          <p>{message}</p>
           {edit && (
             <div className="update">
               <Button className="updateBut" onClick={handleUpdate}>
@@ -182,9 +232,16 @@ export const Stats = ({ setNav }) => {
               <p>{message}</p>
             </div>
           )}
-          {((edit && schedule) && checkComplete(schedule)) && (
+          {edit && schedule && checkComplete(schedule) && ronda == "round1" && (
             <div className="finishRound">
               <Button onClick={handleFinish}>Finalizar Ronda</Button>
+            </div>
+          )}
+          {edit && schedule && checkComplete(schedule) && ronda != "round1" && (
+            <div className="finishRound">
+              <Button onClick={handleFinishSecondRound}>
+                Finalizar Segunda Ronda
+              </Button>
             </div>
           )}
         </section>

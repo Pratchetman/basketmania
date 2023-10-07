@@ -18,7 +18,8 @@ export const CreateJornada = ({
   const { addRound1 } = DataFetch();
   console.log("season",season);
   console.log("jornadaNumber", jornadaNumber);
-console.log("round", round)
+  console.log("round", round);
+  
   const deepCopy = (arr) => {
     return arr.map((innerArray) => {
       return innerArray.map((obj) => ({ ...obj }));
