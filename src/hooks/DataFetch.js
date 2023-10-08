@@ -3,6 +3,7 @@ import { app } from "../utils/firebaseConfig";
 import { child, get, getDatabase, ref, set } from "firebase/database";
 import { BasketmaniaContext } from "../context/BasketmaniaContext";
 import calculateRanking from "../utils/calculateRanking";
+import lastschedule from "../utils/faseFinalShedule";
 
 const DataFetch = () => {
   const context = useContext(BasketmaniaContext);
@@ -107,9 +108,9 @@ const DataFetch = () => {
             calculateRanking(grupoBsched, resB.val()).slice(0, 3)
           );
           console.log(faseFinalTeams);
-  
+          let finalphase = lastschedule(faseFinalTeams)
           let object = {};
-  
+
           for (let i = 0; i < faseFinalTeams.length; i++) {
             object[faseFinalTeams[i].id] = {
               id: faseFinalTeams[i].id,
@@ -119,14 +120,15 @@ const DataFetch = () => {
           }
           set(ref(dbs, "faseFinalTeams/"), object)
             .then(() => {
-              resolve("Fase Final Creada Correctamente");
+              set(ref(dbs, "rondaFinal/"), finalphase)
+              .then(() => {
+                resolve("Fase Final Creada Correctamente");
+              })
             })
             .catch((error) => reject(error));
         });
       });
-    })
-
- 
+    });
   };
 
   const getPlayers = () => {

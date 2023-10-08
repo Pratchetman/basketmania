@@ -113,7 +113,7 @@ export const Stats = ({ setNav }) => {
       >
         <option value="round1">1ª Ronda</option>
         <option value="round_groupA">2ª Ronda</option>
-        <option value="fase_final">Fase Final</option>
+        <option value="rondaFinal">Fase Final</option>
       </Form.Select>
       {(ronda == "round_groupA" || ronda == "round_groupB") && (
         <div className="groupsBut">
@@ -150,7 +150,7 @@ export const Stats = ({ setNav }) => {
                 setMessage("");
               }}
             >
-              {schedule[jornada - 1] ? "⬅️ Jornada anterior" : ""}
+              {schedule[jornada - 1]  && ronda != "rondaFinal" ? "⬅️ Jornada anterior" : ""}
             </p>
             <h3>Jornada: {jornada + 1}</h3>
             <p
@@ -160,12 +160,12 @@ export const Stats = ({ setNav }) => {
                 setMessage("");
               }}
             >
-              {schedule[jornada + 1] ? "Jornada siguiente ➡️" : ""}
+              {schedule[jornada + 1] && ronda != "rondaFinal" ? "Jornada siguiente ➡️" : ""}
             </p>
           </div>
         )}
 
-        {schedule &&
+        {schedule && ronda != "rondaFinal" &&
           schedule[jornada]?.map((elem, index) => {
             return (
               <>
@@ -217,9 +217,9 @@ export const Stats = ({ setNav }) => {
               </>
             );
           })}
-        {ronda == "fase_final" &&
+        {ronda == "rondaFinal" && schedule[0][0].matchId == "previa1" &&
             <section>
-              <FaseFinal />
+              <FaseFinal schedule={schedule} setSchedule={setSchedule} />
             </section>
         }
           <section>

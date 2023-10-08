@@ -11,5 +11,5 @@ export const Team = ({ teamId }) => {
       .catch((err) => console.log(err));
   }, []);
 
-  return <p>{name}</p>;
+  return <p>{name ? name : "-"}</p>;
 };
