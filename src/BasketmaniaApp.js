@@ -27,6 +27,7 @@ export const BasketmaniaApp = () => {
           <Route path="/newSeason" element={<AddNewJornada nav={nav} setNav={setNav} />} />
           <Route path="/players" element={<Players nav={nav} setNav={setNav} />} />
           <Route path="/players/:player_id/edit" element={<OnePlayer nav={nav} setNav={setNav} />} />
+          <Route path="/players/:player_id" element={<OnePlayer nav={nav} setNav={setNav} />} />
           <Route path="/standings" element={<Standings nav={nav} setNav={setNav} />} />
           <Route path="/calendar" element={<Stats nav={nav} setNav={setNav} />} />
           <Route path="/calendar/:editor" element={<Stats nav={nav} setNav={setNav} />} />

@@ -90,10 +90,6 @@ const DataFetch = () => {
   };
 
   const finishSecondRound = (grupoAsched, grupoBsched) => {
-    // console.log(grupoAsched);
-    // console.log(grupoBsched);
-
-    // console.log("stoy aqui");
     let dbs = getDatabase();
     let faseFinalTeams = [];
 

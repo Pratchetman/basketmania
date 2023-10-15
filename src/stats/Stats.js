@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import checkComplete from "../utils/checkcomplete";
 import { FaseFinal } from "../components/FaseFinal";
+import nextFinalRound from "../utils/nextFinalRound";
 
 export const Stats = ({ setNav }) => {
   const edit = useParams().editor == "edit";
@@ -27,11 +28,10 @@ export const Stats = ({ setNav }) => {
         if (res.val()) {
           setSchedule(res.val());
         } else {
-          if (ronda != "fase_final")
-          {
+          if (ronda != "fase_final") {
             setMessage(
-            "No existe ningún calendario creado, consulte con el administrador"
-          );
+              "No existe ningún calendario creado, consulte con el administrador"
+            );
           }
           setSchedule("");
         }
@@ -66,6 +66,7 @@ export const Stats = ({ setNav }) => {
   const handleUpdate = () => {
     addRound1(schedule, ronda)
       .then(() => {
+        setRonda("rondaFinal");
         setMessage("Datos actualizados correctamente");
       })
       .catch((err) => console.log(err));
@@ -89,9 +90,9 @@ export const Stats = ({ setNav }) => {
         if (resA.val() && resB.val()) {
           grupoAsched = resA.val();
           grupoBsched = resB.val();
-          finishSecondRound(grupoAsched, grupoBsched).then((res) =>{
+          finishSecondRound(grupoAsched, grupoBsched).then((res) => {
             setMessage(res);
-          })
+          });
         } else {
           setMessage("Error al extraer resultados de los Grupos A o B");
         }
@@ -150,7 +151,9 @@ export const Stats = ({ setNav }) => {
                 setMessage("");
               }}
             >
-              {schedule[jornada - 1]  && ronda != "rondaFinal" ? "⬅️ Jornada anterior" : ""}
+              {schedule[jornada - 1] && ronda != "rondaFinal"
+                ? "⬅️ Jornada anterior"
+                : ""}
             </p>
             <h3>Jornada: {jornada + 1}</h3>
             <p
@@ -160,12 +163,15 @@ export const Stats = ({ setNav }) => {
                 setMessage("");
               }}
             >
-              {schedule[jornada + 1] && ronda != "rondaFinal" ? "Jornada siguiente ➡️" : ""}
+              {schedule[jornada + 1] && ronda != "rondaFinal"
+                ? "Jornada siguiente ➡️"
+                : ""}
             </p>
           </div>
         )}
 
-        {schedule && ronda != "rondaFinal" &&
+        {schedule &&
+          ronda != "rondaFinal" &&
           schedule[jornada]?.map((elem, index) => {
             return (
               <>
@@ -217,12 +223,16 @@ export const Stats = ({ setNav }) => {
               </>
             );
           })}
-        {ronda == "rondaFinal" && schedule[0][0].matchId == "previa1" &&
-            <section>
-              <FaseFinal schedule={schedule} setSchedule={setSchedule} />
-            </section>
-        }
+        {ronda == "rondaFinal" && schedule[0][0].matchId == "previa1" && (
           <section>
+            <FaseFinal
+              schedule={schedule}
+              setSchedule={setSchedule}
+              edit={edit}
+            />
+          </section>
+        )}
+        <section>
           <p>{message}</p>
           {edit && (
             <div className="update">

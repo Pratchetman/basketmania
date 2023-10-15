@@ -9,7 +9,7 @@ export const Team = ({ teamId }) => {
     teamToName(teamId)
       .then((res) => setName(res.val().name))
       .catch((err) => console.log(err));
-  }, []);
+  }, [teamId]);
 
   return <p>{name ? name : "-"}</p>;
 };
