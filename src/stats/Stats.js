@@ -155,7 +155,7 @@ export const Stats = ({ setNav }) => {
                 ? "⬅️ Jornada anterior"
                 : ""}
             </p>
-            <h3>Jornada: {jornada + 1}</h3>
+            {ronda != "rondaFinal" && <h3>Jornada: {jornada + 1}</h3>}
             <p
               className="next"
               onClick={() => {
